@@ -5,7 +5,7 @@ This repo measures that trade-off in one simulated cell: same parcels, same came
 
 ![Same parcel, three deciders](docs/frames/en_17.5.jpg)
 
-Video (47 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
+Video (57 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
 
 ## Setup
 
@@ -112,7 +112,7 @@ Limits: synthetic stains are flat ellipses, so colour separation is far cleaner 
 
 When a safe candidate existed and a choice was needed (21 boxes): Opus 21/21, geometric rule 17/21.
 Motion on the 12 boxes both handled: 7.64 s → 5.72 s (−25%), a gain that comes from the candidates, not the LLM. Opus adds ~4.5 s (server time) per box, which can run while the previous box moves. Candidate generation takes 55 s in this CPU Python prototype; a production planner is NOT_RUN. Opus cost $1.56 at CLI prices for 31 calls.
-Limits: synthetic images make damage obvious; suction and collision margins are assumptions; the LLM had no MANUAL option, so its 12 failures are boxes with no safe point (rerun NOT_RUN). `plan.py` needs the `cellkit` helper (set `CELLKIT_DIR`), not included.
+Limits: synthetic images make damage obvious; suction and collision margins are assumptions; the LLM had no MANUAL option, so its 12 failures are boxes with no safe point (rerun NOT_RUN). `plan.py` needs the `cellkit` helper (set `CELLKIT_DIR`), not included. `isaac/unstruct_video.py u_006` renders the same box three ways in the same RB16 Isaac cell (taught rule hits the belt rail, fastest valid grasp lands on the wet patch and drops, Opus's choice is placed); the clip's timer counts planning + robot motion.
 
 ## Files
 

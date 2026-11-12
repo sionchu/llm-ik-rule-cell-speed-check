@@ -113,13 +113,16 @@ def triptych(sid, header, truth, hold_end=1.4, stamp=True):
             # thinking overlay while deciding
             yb = PTOP + PH_IMG
             text(d, (x + 18, yb + 16), name, F(34), INK); text(d, (x + 18, yb + 58), sub, F(22, "r"), MUTE)
-            el = clamp(s - A, 0, lat)
-            decided = s >= A + lat
+            mv = (m["frames"] - m["arrive_frames"]) / SRC
+            el = clamp(s - A, 0, lat + mv)
+            decided = s >= A + lat; done = s >= A + lat + mv
             col = (GOOD if ok else BAD) if decided else ACC
             text(d, (x + PW - 18, yb + 14), f"{el:4.1f} s", F(46), col, "ra")
-            text(d, (x + PW - 18, yb + 70), "this parcel", F(20, "r"), MUTE, "ra")
-            bw = PW - 36; d.rounded_rectangle([x + 18, yb + 104, x + 18 + bw, yb + 118], 7, fill=(228, 232, 240))
-            d.rounded_rectangle([x + 18, yb + 104, x + 18 + max(14, bw * min(el, 7.0) / 7.0), yb + 118], 7, fill=col)
+            text(d, (x + PW - 18, yb + 182), f"decide {lat:.1f} s + move {mv:.1f} s" if done else ("" if not decided else "moving"), F(22, "r"), MUTE, "ra")
+            bw = PW - 36; sc = 12.0; d.rounded_rectangle([x + 18, yb + 104, x + 18 + bw, yb + 118], 7, fill=(228, 232, 240))
+            d.rounded_rectangle([x + 18, yb + 104, x + 18 + max(14, bw * min(el, sc) / sc), yb + 118], 7, fill=col)
+            xd = x + 18 + bw * min(lat, sc) / sc
+            if decided: d.line([xd, yb + 98, xd, yb + 124], fill=INK, width=3)
             if s >= A and not decided:
                 dots = "." * (1 + int(tv * 4) % 3); text(d, (x + 18, yb + 140), "deciding" + dots, F(34, "r"), ACC)
             if decided:
@@ -214,6 +217,72 @@ v_rows = [("Rule + vision", tt["rule_vision_hard"]["pph_pipe"], GR, "56/100", BA
 last = bars_card("Rebuilt: Opus only on doubtful boxes", "barcode + scale + damage check ‖ Gemini Decisions → Opus only when unsure · 100 hard parcels · right: correct",
                  v_rows, 700, lambda v: f"{v:,.0f} /h", dur=3.6,
                  note="Once the call fits inside the move, the robot sets the rate. The gain is accuracy and cost: Opus on 18% of boxes."); flash(last)
+
+# ---------- unstructured triptych: same RB16 cell, box lands anywhere (Isaac, isaac/unstruct_video.py)
+MU = json.load(open(os.path.join(R, "results", "video_u", "meta.json")))
+CROP_U = (500, 40, 1320, 1060)
+def src_u(key, i):
+    m = MU[key]; i = int(clamp(i, 0, m["frames"] - 1)); p = os.path.join(R, "results", "video_u", key, f"{i:04d}.png")
+    if p not in _cache:
+        if len(_cache) > 400: _cache.clear()
+        _cache[p] = Image.open(p).convert("RGB").crop(CROP_U).resize((PW, PH_IMG), Image.LANCZOS)
+    return _cache[p]
+def triptych_u(sid="u_006", hold_end=1.8):
+    cu = next(json.loads(l) for l in open(os.path.join(R, "unstructured", "cands.jsonl")) if json.loads(l)["id"] == sid)
+    pu = next(json.loads(l) for l in open(os.path.join(R, "unstructured", "pred_claude_claude-opus-5-5-low.jsonl")) if json.loads(l)["id"] == sid)
+    tc = cu["t_cand_s"]; tl = pu["api_ms"] / 1000
+    rows = [("rule", "TAUGHT RULE", "centre grasp · taught height", cu["t_rule_s"], "CRASH", "plan"),
+            ("geom", "GEOMETRIC RULE", "fastest valid grasp · no image", tc, "DROPPED", "plan"),
+            ("llm", "CLAUDE OPUS 5.5", "same candidates + image", tc + tl, "PLACED", "plan")]
+    A = MU[f"{sid}_rule"]["arrive_frames"] / SRC
+    def end_s(mode, lat):
+        m = MU[f"{sid}_{mode}"]; ev = m["event_frame"] if m["event_frame"] is not None else m["frames"] - int(0.8 * SRC)
+        return A + lat + (ev - m["arrive_frames"]) / SRC
+    ends = {r[0]: end_s(r[0], r[3]) for r in rows}
+    s_tot = max(A + r[3] + (MU[f"{sid}_{r[0]}"]["frames"] - MU[f"{sid}_{r[0]}"]["arrive_frames"]) / SRC for r in rows)
+    frames = []; s = 0.0
+    while s < s_tot:
+        moving = s < A or any(A + r[3] <= s <= A + r[3] + (MU[f"{sid}_{r[0]}"]["frames"] - MU[f"{sid}_{r[0]}"]["arrive_frames"]) / SRC for r in rows)
+        sp = SPEED if moving else 14.0; frames.append((s, sp)); s += sp / FPS
+    frames += [(s_tot, SPEED)] * int(hold_end * FPS)
+    ins = Image.open(os.path.join(R, "unstructured", "img", f"{sid}.jpg")).convert("RGB"); ins.thumbnail((320, 320))
+    last = None
+    for i, (s, sp) in enumerate(frames):
+        tv = i / FPS; th = max(0.0, (i - (len(frames) - int(hold_end * FPS))) / FPS)
+        im = Image.new("RGBA", (W, H), (244, 246, 250, 255)); d = ImageDraw.Draw(im)
+        pop_text(im, (40, 34), "Parcel 3  ·  lands anywhere, wet patch near the centre", F(54), INK, tv / 0.3)
+        text(d, (40, 104), "Same RB16 cell, 15 drop funnels (target in green). Code builds IK + collision-checked grasps; the deciders choose.", F(28, "r"), MUTE)
+        text(d, (W - 40, 50), f"{sp:.0f}x speed" + ("  >> planning" if sp > SPEED else ""), F(26, "r"), MUTE if sp == SPEED else ACC, "ra")
+        d.rounded_rectangle([30, PTOP, 30 + 330, PTOP + ins.height + 70], 14, fill=WHITE); im.paste(ins, (35, PTOP + 5))
+        text(d, (40, PTOP + ins.height + 18), "Grasp candidates (top view)", F(24), INK); text(d, (40, PTOP + ins.height + 46), "image sent to the LLM", F(20, "r"), MUTE)
+        text(d, (40, 640), "Candidate planning", F(26), INK); text(d, (40, 674), f"{tc:.0f} s", F(40), (200, 140, 20)); text(d, (40, 724), "CPU Python prototype,", F(20, "r"), MUTE); text(d, (40, 750), "not optimised", F(20, "r"), MUTE)
+        for k, (mode, name, sub, lat, verdict, _) in enumerate(rows):
+            x = PX0 + k * (PW + PG); key = f"{sid}_{mode}"; m = MU[key]
+            if s < A: fi = s * SRC
+            elif s < A + lat: fi = m["arrive_frames"] - 1
+            else: fi = m["arrive_frames"] + (s - A - lat) * SRC
+            d.rounded_rectangle([x - 4, PTOP - 4, x + PW + 4, PTOP + PH_IMG + 214], 16, fill=WHITE); im.paste(src_u(key, fi), (x, PTOP))
+            yb = PTOP + PH_IMG; ok = verdict == "PLACED"
+            text(d, (x + 18, yb + 16), name, F(34), INK); text(d, (x + 18, yb + 58), sub, F(22, "r"), MUTE)
+            mv = ends[mode] - A - lat; el = clamp(s - A, 0, lat + mv); decided = s >= A + lat; done = s >= ends[mode]
+            col = (GOOD if ok else BAD) if done else ACC
+            text(d, (x + PW - 18, yb + 14), f"{el:4.1f} s", F(46), col, "ra")
+            text(d, (x + PW - 18, yb + 182), f"plan {lat:.1f} s + move {mv:.1f} s" if done else ("" if not decided else "moving"), F(22, "r"), MUTE, "ra")
+            bw = PW - 36; sc = 40.0; d.rounded_rectangle([x + 18, yb + 104, x + 18 + bw, yb + 118], 7, fill=(228, 232, 240))
+            d.rounded_rectangle([x + 18, yb + 104, x + 18 + max(14, bw * min(el, sc) / sc), yb + 118], 7, fill=col)
+            if s >= A and not decided:
+                dots = "." * (1 + int(tv * 4) % 3); text(d, (x + 18, yb + 140), ("choosing" if mode == "llm" and s >= A + tc else "planning") + dots, F(34, "r"), ACC)
+            if done:
+                pop_text(im, (x + 18, yb + 132), {"CRASH": "hits the belt rail", "DROPPED": "cup on the wet patch, drops", "PLACED": "off the patch, into the funnel"}[verdict], F(34), col, (s - ends[mode]) / SPEED / 0.25)
+                t2 = clamp((s - ends[mode]) / SPEED / 0.3); k2 = 2.2 - 1.2 * back(t2); c = GOOD if ok else BAD
+                L = Image.new("RGBA", (420, 150), (0, 0, 0, 0)); dl = ImageDraw.Draw(L)
+                dl.rounded_rectangle([6, 6, 414, 144], 18, outline=c + (255,), width=10); dl.text((210, 75), verdict, font=F(78), fill=c + (255,), anchor="mm")
+                L = L.rotate(-8, expand=True, resample=Image.BICUBIC); L = L.resize((max(1, int(L.width * k2 * 0.8)), max(1, int(L.height * k2 * 0.8))))
+                a = L.split()[3].point(lambda v: int(v * ease_out(t2 * 1.5))); L.putalpha(a)
+                im.alpha_composite(L, (int(x + PW / 2 - L.width / 2), int(PTOP + 60)))
+        emit(im); last = im
+    return last
+last = triptych_u(); flash(last)
 
 # ---------- unstructured cell card (boxes land anywhere)
 U = json.load(open(os.path.join(R, "unstructured", "results_u.json")))["summary"]

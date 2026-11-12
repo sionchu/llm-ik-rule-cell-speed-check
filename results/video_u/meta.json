@@ -1,0 +1,52 @@
+{
+ "u_006_rule": {
+  "frames": 91,
+  "arrive_frames": 36,
+  "outcome": "crash",
+  "event": "crash",
+  "event_frame": 71,
+  "segments_s": [
+   0.67,
+   0.41,
+   0.78
+  ],
+  "move_s": 2.16,
+  "fps": 24,
+  "cid": null
+ },
+ "u_006_geom": {
+  "frames": 121,
+  "arrive_frames": 36,
+  "outcome": "drop",
+  "event": "drop",
+  "event_frame": 88,
+  "segments_s": [
+   0.67,
+   0.41,
+   0.287,
+   1.273
+  ],
+  "move_s": 2.94,
+  "fps": 24,
+  "cid": "g0nl"
+ },
+ "u_006_llm": {
+  "frames": 165,
+  "arrive_frames": 36,
+  "outcome": "ok",
+  "event": null,
+  "event_frame": null,
+  "segments_s": [
+   0.631,
+   0.412,
+   0.462,
+   1.214,
+   0.0,
+   0.0,
+   1.209
+  ],
+  "move_s": 4.228,
+  "fps": 24,
+  "cid": "g5nm"
+ }
+}
