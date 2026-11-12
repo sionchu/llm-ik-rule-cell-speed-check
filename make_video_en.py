@@ -215,6 +215,40 @@ last = bars_card("Rebuilt: Opus only on doubtful boxes", "barcode + scale + dama
                  v_rows, 700, lambda v: f"{v:,.0f} /h", dur=3.6,
                  note="Once the call fits inside the move, the robot sets the rate. The gain is accuracy and cost: Opus on 18% of boxes."); flash(last)
 
+# ---------- unstructured cell card (boxes land anywhere)
+U = json.load(open(os.path.join(R, "unstructured", "results_u.json")))["summary"]
+uimg = Image.open(os.path.join(R, "unstructured", "img", "u_027.jpg")).convert("RGBA").resize((640, 640))
+def pt(px, py): return (110 + px * 640 / 1400, 250 + py * 640 / 1400)
+u_rows = [("Taught rule + vision", U["rule_taught"]["success"], GR, f'{U["rule_taught"]["fails"]["drop"]} drops · {U["rule_taught"]["fails"]["crash"]} crashes'),
+          ("Fastest IK-checked grasp", U["rule_geom"]["success"], (150, 120, 220), "ignores damage"),
+          ("Opus picks the grasp", U["llm"]["success"], GOOD, "= ceiling")]
+n = int(4.2 * FPS)
+for i in range(n):
+    t = i / FPS; im, d = card_frame("Boxes land anywhere", "40 boxes · random size and pose · 26 damaged · code makes IK + collision-checked grasps, LLM picks one", t)
+    im.alpha_composite(uimg, (110, 250))
+    e = ease_out((t - 0.6) / 0.4)
+    if e > 0:
+        (x0, y0), (x5, y5) = pt(700, 700), pt(850, 622); r = 18 + 10 * (1 - e)
+        d.line([x0 - r, y0 - r, x0 + r, y0 + r], fill=BAD, width=8); d.line([x0 - r, y0 + r, x0 + r, y0 - r], fill=BAD, width=8)
+        d.ellipse([x5 - 44, y5 - 44, x5 + 44, y5 + 44], outline=GOOD, width=9)
+        text(d, (110, 902), "centre grasp lands on the tear → drop", F(30), BAD)
+        text(d, (110, 940), "LLM picks point 5, off the tear", F(30), GOOD)
+    for k, (lab, v, col, tag) in enumerate(u_rows):
+        y = 300 + k * 170; tk = clamp((t - 0.9 - 0.15 * k) / 0.7); ee = ease_out(tk); X, BWU = 830, 640
+        text(d, (X, y - 52), lab, F(40), INK)
+        d.rounded_rectangle([X, y, X + BWU, y + 60], 12, fill=(232, 236, 243))
+        if ee > 0: d.rounded_rectangle([X, y, X + max(20, BWU * v * ee / 40), y + 60], 12, fill=col)
+        if tk > 0: text(d, (X + BWU + 24, y - 2), f"{v * ee:.0f}/40", F(48), INK)
+        if tk >= 1: text(d, (X, y + 66), tag, F(28, "r"), MUTE)
+    xc = 830 + 640 * 23 / 40
+    if t > 1.6:
+        for k in range(3): d.line([xc, 300 + k * 170 - 8, xc, 300 + k * 170 + 68], fill=(190, 130, 10), width=4)
+        text(d, (xc - 60, 300 + 2 * 170 + 130), "ceiling 23", F(26), (190, 130, 10))
+    text(d, (830, 900), "When a choice was needed: LLM 21/21, geometric rule 17/21.", F(30), INK)
+    text(d, (110, 1010), "Synthetic top-view images, suction rules assumed. Same motion gain (-25%) comes from the candidates, not the LLM.", F(24, "r"), MUTE)
+    emit(im); last = im
+flash(last)
+
 # ---------- robot motion program card (2.6 s)
 n = int(2.6 * FPS)
 for i in range(n):
@@ -237,7 +271,7 @@ for i in range(n):
     for k, (a, b, c) in enumerate(L3):
         pop_text(im, (130, 210 + k * 210), a, F(76), c, (t - 0.15 - 0.45 * k) / 0.3)
         pop_text(im, (134, 304 + k * 210), b, F(38, "r"), (180, 190, 210), (t - 0.35 - 0.45 * k) / 0.3)
-    pop_text(im, (130, 860), "Fixed box pose and paths here. Next: flipped or half-out-of-view boxes, which no one can teach in advance.", F(32, "r"), (150, 200, 255), (t - 1.8) / 0.3)
-    text(d, (130, 990), "Isaac Sim simulation · 300 synthetic parcels · Nov 2026 · not field data", F(24, "r"), (120, 132, 155))
+    pop_text(im, (130, 860), "Boxes landing anywhere: taught rule 12/40, LLM picking IK-checked grasps 23/40. Next: flipped boxes.", F(32, "r"), (150, 200, 255), (t - 1.8) / 0.3)
+    text(d, (130, 990), "Isaac Sim + synthetic images · 300 parcels + 40 unstructured boxes · Nov 2026 · not field data", F(24, "r"), (120, 132, 155))
     emit(im)
 ff.stdin.close(); ff.wait(); print("frames", N[0], "sec", round(N[0] / FPS, 1))

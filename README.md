@@ -5,7 +5,7 @@ This repo measures that trade-off in one simulated cell: same parcels, same came
 
 ![Same parcel, three deciders](docs/frames/en_17.5.jpg)
 
-Video (43 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
+Video (47 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
 
 ## Setup
 
@@ -98,6 +98,21 @@ Once the decision fits inside the move, the robot sets the rate; the gain is acc
 \* Opus time here is server time (`api_ms`, close to a direct API call), shorter than the 4.6 s CLI round trip in part 1.
 
 Limits: synthetic stains are flat ellipses, so colour separation is far cleaner than on real cartons. The v3 colour ranges were set after looking at missed images (hard included), so hard is not a strict holdout. Decisions not run on the fc set (NOT_RUN).
+
+## Part 3: boxes land anywhere (`unstructured/`, `unstructured/RESULTS_unstructured.md`)
+
+40 boxes with random size (20–50 cm), pose (±90°) and position, 26 damaged (torn or wet), 22 with a neighbouring box, 15 destinations. RB16 kinematics, Lula IK and point-sampled collision checks against belt, rails, neighbour box and drop funnels. Synthetic top-view images (PIL), no physics.
+
+| Method | What it does | handled automatically /40 |
+|---|---|---|
+| Taught rule + vision | vision corrects box position and angle; centre suction; taught travel height (1.20 m); no collision check at run time | 12 (19 drops, 5 collisions, 4 IK failures) |
+| Geometric rule | 54 candidates (9 suction points × 2 wrist flips × 3 travel heights) filtered by IK + collision + holding torque; fastest one; image not used | 19 |
+| **Opus picks** | same valid candidates + the image, Opus (low) chooses one; called only when ≥ 2 suction points are valid (31 calls) | **23** |
+| Ceiling | fastest valid candidate that does not drop the box | 23 |
+
+When a safe candidate existed and a choice was needed (21 boxes): Opus 21/21, geometric rule 17/21.
+Motion on the 12 boxes both handled: 7.64 s → 5.72 s (−25%), a gain that comes from the candidates, not the LLM. Opus adds ~4.5 s (server time) per box, which can run while the previous box moves. Candidate generation takes 55 s in this CPU Python prototype; a production planner is NOT_RUN. Opus cost $1.56 at CLI prices for 31 calls.
+Limits: synthetic images make damage obvious; suction and collision margins are assumptions; the LLM had no MANUAL option, so its 12 failures are boxes with no safe point (rerun NOT_RUN). `plan.py` needs the `cellkit` helper (set `CELLKIT_DIR`), not included.
 
 ## Files
 
