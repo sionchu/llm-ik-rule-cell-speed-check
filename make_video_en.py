@@ -59,6 +59,7 @@ def hook():
     n = int(2.4 * FPS); last = None
     for i in range(n):
         t = i / FPS; im = Image.new("RGBA", (W, H), NAVY + (255,)); d = ImageDraw.Draw(im)
+        pop_text(im, (W // 2, 250), "Claude Fable 5.2 scores high as a robot agent. Does it keep up with a line?", F(40, "r"), AMB, (t - 0.0) / 0.3, "ma")
         pop_text(im, (W // 2, 380), "Is an LLM too slow", F(110), WHITE, (t - 0.0) / 0.35, "ma")
         pop_text(im, (W // 2, 520), "for a robot parcel line?", F(110), AMB, (t - 0.35) / 0.35, "ma")
         pop_text(im, (W // 2, 720), "We measured it.  Isaac Sim  ·  same parcels  ·  same camera", F(40, "r"), (170, 180, 200), (t - 0.9) / 0.3, "ma")
@@ -116,6 +117,7 @@ def triptych(sid, header, truth, hold_end=1.4, stamp=True):
             decided = s >= A + lat
             col = (GOOD if ok else BAD) if decided else ACC
             text(d, (x + PW - 18, yb + 14), f"{el:4.1f} s", F(46), col, "ra")
+            text(d, (x + PW - 18, yb + 70), "this parcel", F(20, "r"), MUTE, "ra")
             bw = PW - 36; d.rounded_rectangle([x + 18, yb + 104, x + 18 + bw, yb + 118], 7, fill=(228, 232, 240))
             d.rounded_rectangle([x + 18, yb + 104, x + 18 + max(14, bw * min(el, 7.0) / 7.0), yb + 118], 7, fill=col)
             if s >= A and not decided:
@@ -141,7 +143,7 @@ def card_frame(title, sub, t):
     return im, d
 
 BW = 760
-def bars_card(title, sub, rows, vmax, fmt, dur=2.9, extra=None, note=None):
+def bars_card(title, sub, rows, vmax, fmt, dur=2.9, extra=None, note=None, fmt2=None):
     n = int(dur * FPS); last = None
     for i in range(n):
         t = i / FPS; im, d = card_frame(title, sub, t)
@@ -150,8 +152,10 @@ def bars_card(title, sub, rows, vmax, fmt, dur=2.9, extra=None, note=None):
             text(d, (110, y + 6), lab, F(40), INK)
             d.rounded_rectangle([700, y, 700 + BW, y + 64], 12, fill=(232, 236, 243))
             if e > 0: d.rounded_rectangle([700, y, 700 + max(20, BW * v * e / vmax), y + 64], 12, fill=col)
-            text(d, (700 + BW + 24, y + 2), fmt(v * e) if tk > 0 else "", F(48), INK)
-            if len(r) > 3 and tk >= 1: pop_text(im, (1880, y + 8), r[3], F(40), r[4], (t - 0.25 - 0.12 * k - 0.7) / 0.25, "ra")
+            fixed = r[5] if len(r) > 5 and tk >= 1 else None          # optional final labels, e.g. a range
+            text(d, (700 + BW + 24, y - 4), (fixed[0] if fixed else fmt(v * e)) if tk > 0 else "", F(44 if fmt2 else 48), INK)
+            if fmt2 and tk > 0: text(d, (700 + BW + 26, y + 46), fixed[1] if fixed else fmt2(v * e), F(28, "r"), MUTE)
+            if len(r) > 3 and r[3] and tk >= 1: pop_text(im, (1880, y + 8), r[3], F(40), r[4], (t - 0.25 - 0.12 * k - 0.7) / 0.25, "ra")
         if extra: extra(im, d, t)
         if note: text(d, (110, 960), note, F(26, "r"), MUTE)
         emit(im); last = im
@@ -162,7 +166,7 @@ hook()
 last = triptych("fc_stream_0004", "Parcel 1  ·  normal order", "Ground truth: OK, ship it", hold_end=0.6, stamp=False); flash(last)
 last = triptych("fc_hard_0079", "Parcel 2  ·  damage no rule has seen", "Ground truth: DAMAGED (crushed corner)", hold_end=1.6); flash(last)
 
-usd = lambda krw: krw / 1400
+usd = lambda krw: krw / 1400 / 10000          # per box
 acc_rows = [("Rule", 54, (150, 160, 175), "missed 4", BAD), ("Claude Opus 5.5", 87, ACC, "missed 7", BAD), ("Claude Fable 5.2", 94, GOOD, "missed 0", GOOD)]
 last = bars_card("Accuracy on unseen faults", "100 hard parcels: crushed corners, oil stains, Korean fragile stickers, wrong-order labels",
                  acc_rows, 100, lambda v: f"{v:.0f}", note="Normal flow (200 parcels): all three caught every fault. Gemini Flash: 83/100, not shown."); flash(last)
@@ -173,29 +177,67 @@ def cyc_band(im, d, t):
         L = Image.new("RGBA", im.size, (0, 0, 0, 0)); dl = ImageDraw.Draw(L)
         dl.rectangle([xa, 280, xb, 760], fill=(255, 205, 70, int(110 * e))); im.alpha_composite(L)
         text(d, (xa, 768), "robot pick-and-place cycle 4.5 - 6.1 s", F(28), (190, 130, 10))
+    e2 = ease_out((t - 0.7) / 0.5); xc, xd = 700 + BW * 1.4 / 16, 700 + BW * 2.3 / 16
+    if e2 > 0:
+        L = Image.new("RGBA", im.size, (0, 0, 0, 0)); dl = ImageDraw.Draw(L)
+        dl.rectangle([xc, 280, xd, 760], fill=(220, 60, 60, int(90 * e2))); im.alpha_composite(L)
+        text(d, (xc, 806), "high-speed sorter 1.4 - 2.3 s per parcel (1,600-2,500 /h)", F(28), (200, 50, 50))
 spd_rows = [("Rule", 0.5, (150, 160, 175)), ("Claude Opus 5.5", cost["opus"]["latency_med_s"], ACC), ("Claude Fable 5.2", cost["fable"]["latency_med_s"], GOOD), ("Human video coding*", 15.0, (190, 196, 206))]
 last = bars_card("Decision time", "median, measured end to end (LLM via CLI)", spd_rows, 16, lambda v: f"{v:.1f} s", extra=cyc_band,
-                 note="* industry figure for manual video coding of unreadable parcels. LLM ~ one robot cycle, ~3x faster than a human."); flash(last)
+                 note="* industry figure for manual video coding. LLM fits a cobot cycle, not a high-speed sorter."); flash(last)
+
+tt = json.load(open(os.path.join(R, "results", "total_time.json")))
+GR = (150, 160, 175)
+t_rows = [("Rule · robot waits", tt["rule_fc_stream"]["pph_seq"], GR), ("Opus 5.5 · robot waits", tt["opus_fc_stream"]["pph_seq"], ACC),
+          ("Fable 5.2 · robot waits", tt["fable_fc_stream"]["pph_seq"], GOOD), ("Rule · while moving", tt["rule_fc_stream"]["pph_pipe"], GR),
+          ("Opus 5.5 · while moving", tt["opus_fc_stream"]["pph_pipe"], ACC), ("Fable 5.2 · while moving", tt["fable_fc_stream"]["pph_pipe"], GOOD)]
+last = bars_card("Boxes per hour, robot motion included", "pick-and-place 6.1 s to the line, 4.5 s to the tote · while moving = next box decided during the current move · 200-parcel normal flow",
+                 t_rows, 700, lambda v: f"{v:,.0f} /h", dur=3.4,
+                 note="Rule's false alarms take the shorter tote path, which flatters its rate."); flash(last)
 
 c_rows = [("Rule only", usd(cost["rule"]["err_krw"]), (150, 160, 175)),
           ("Opus on every parcel", usd(cost["opus"]["A"]["err_krw"] + cost["opus"]["A"]["api_krw_cli"]), API),
           ("Fable on every parcel", usd(cost["fable"]["A"]["err_krw"] + cost["fable"]["A"]["api_krw_cli"]), API),
           ("Rule → flagged 35% → Opus*", usd(cost["opus"]["B"]["err_krw"] + cost["opus"]["B"]["api_krw_direct_est"]), ACC),
-          ("Rule → flagged 35% → Fable*", usd(cost["fable"]["B"]["err_krw"] + cost["fable"]["B"]["api_krw_direct_est"]), GOOD)]
-last = bars_card("Cost per 10,000 parcels", "missed fault $35 · needless human check $0.04 · fault rate 0.3% · + LLM API cost",
-                 c_rows, 1400, lambda v: f"${v:,.0f}", dur=3.4,
-                 note="* direct-API price estimated from image tokens (not measured). Break-even: about 1.5 - 3 cents per decision."); flash(last)
+          ("Rule → flagged 35% → Fable*", usd(cost["fable"]["B"]["err_krw"] + cost["fable"]["B"]["api_krw_direct_est"]), GOOD),
+          ("Person checks every box (15 s)", 58.5 / 1400, (190, 196, 206), None, None, ("$0.039-0.045", "₩54-63"))]
+last = bars_card("Cost per box", "LLM API + errors (missed fault $35 · needless check $0.04 · fault rate 0.3%)  ·  $1 = ₩1,400",
+                 c_rows, 0.14, lambda v: f"${v:.3f}", dur=3.8, fmt2=lambda v: f"₩{v * 1400:,.0f}",
+                 note="* direct-API estimate. Rule setup not included: 2 engineer-days ≈ $0.048/box over 10k boxes."); flash(last)
+
+# ---------- rebuilt pipeline card (parcel-sort set, hard 100)
+t3 = json.load(open(os.path.join(R, "results", "total_time_v3.json")))
+v_rows = [("Rule + vision", tt["rule_vision_hard"]["pph_pipe"], GR, "56/100", BAD),
+          ("Decisions only", tt["decisions_hard"]["pph_pipe"], (150, 120, 220), "71/100", BAD),
+          ("Opus on every box", t3["opus_alone_hard"]["pph_pipe"], ACC, "94/100", INK),
+          ("New pipeline", t3["v3_f4_hard"]["pph_pipe"], GOOD, "99/100", GOOD)]
+last = bars_card("Rebuilt: Opus only on doubtful boxes", "barcode + scale + damage check ‖ Gemini Decisions → Opus only when unsure · 100 hard parcels · right: correct",
+                 v_rows, 700, lambda v: f"{v:,.0f} /h", dur=3.6,
+                 note="Once the call fits inside the move, the robot sets the rate. The gain is accuracy and cost: Opus on 18% of boxes."); flash(last)
+
+# ---------- robot motion program card (2.6 s)
+n = int(2.6 * FPS)
+for i in range(n):
+    t = i / FPS; im, d = card_frame("Robot motion program", "written by a coding agent · no teach pendant", t)
+    pop_text(im, (110, 330), "~1 min to write  ·  ~3 min to the first measured cycle", F(52), ACC, (t - 0.3) / 0.3)
+    pop_text(im, (110, 420), "reusing an IK library from an earlier cell", F(34, "r"), MUTE, (t - 0.5) / 0.3)
+    pop_text(im, (110, 560), "Real handling cell (public figures): 10-30 taught points,", F(40), INK, (t - 0.9) / 0.3)
+    pop_text(im, (110, 620), "80-200 h of robot + PLC programming incl. safety", F(40), INK, (t - 1.1) / 0.3)
+    text(d, (110, 960), "Sim cell only: no PLC, safety or on-site calibration. Sources: Relling Systems, Robolist.ai.", F(26, "r"), MUTE)
+    emit(im); last = im
+flash(last)
 
 # ---------- takeaway (4.5 s)
-n = int(4.5 * FPS)
-L3 = [("Fast enough.", "About one robot cycle, ~3x faster than a human.", WHITE),
-      ("More accurate where it matters.", "Unseen damage: 0 missed vs 4 for the rule.", WHITE),
-      ("Not cheaper yet.", "Route only rule-flagged parcels; get each decision under ~2-3 cents.", AMB)]
+n = int(5.0 * FPS)
+L3 = [("Fast enough for a cobot cell.", "~one robot cycle. Not for 1.4-2.3 s sorters: exception lane only.", WHITE),
+      ("More accurate on unseen damage.", "Fable 5.2: 0 missed · Opus 5.5: 7 · rule: 4", WHITE),
+      ("Not cheaper on every box.", "Every box costs more than a person; behind a rule, about the same as the rule.", AMB)]
 for i in range(n):
     t = i / FPS; im = Image.new("RGBA", (W, H), NAVY + (255,)); d = ImageDraw.Draw(im)
     for k, (a, b, c) in enumerate(L3):
         pop_text(im, (130, 210 + k * 210), a, F(76), c, (t - 0.15 - 0.45 * k) / 0.3)
         pop_text(im, (134, 304 + k * 210), b, F(38, "r"), (180, 190, 210), (t - 0.35 - 0.45 * k) / 0.3)
+    pop_text(im, (130, 860), "Fixed box pose and paths here. Next: flipped or half-out-of-view boxes, which no one can teach in advance.", F(32, "r"), (150, 200, 255), (t - 1.8) / 0.3)
     text(d, (130, 990), "Isaac Sim simulation · 300 synthetic parcels · Nov 2026 · not field data", F(24, "r"), (120, 132, 155))
     emit(im)
 ff.stdin.close(); ff.wait(); print("frames", N[0], "sec", round(N[0] / FPS, 1))

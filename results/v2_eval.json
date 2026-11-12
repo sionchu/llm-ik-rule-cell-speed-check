@@ -1,0 +1,394 @@
+{
+ "stream": {
+  "v2": {
+   "n": 200,
+   "correct": 197,
+   "dmg_caught": "6/7",
+   "exc_correct": "11/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.17,
+   "paths": {
+    "barcode": 125,
+    "decisions": 33,
+    "opus": 34,
+    "rule": 8
+   },
+   "t_p50": 1.06,
+   "t_p95": 7.18,
+   "t_mean": 2.39,
+   "tcli_p50": 1.06,
+   "tcli_mean": 2.67
+  },
+  "v2_noflags": {
+   "n": 200,
+   "correct": 197,
+   "dmg_caught": "6/7",
+   "exc_correct": "11/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.16,
+   "paths": {
+    "barcode": 125,
+    "decisions": 35,
+    "opus": 32,
+    "rule": 8
+   },
+   "t_p50": 1.06,
+   "t_p95": 7.05,
+   "t_mean": 2.35,
+   "tcli_p50": 1.06,
+   "tcli_mean": 2.61
+  },
+  "v2_par": {
+   "n": 200,
+   "correct": 198,
+   "dmg_caught": "6/7",
+   "exc_correct": "12/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.23,
+   "paths": {
+    "barcode": 112,
+    "decisions": 33,
+    "opus": 46,
+    "rule": 8,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.34,
+   "t_p95": 6.41,
+   "t_mean": 2.39,
+   "tcli_p50": 1.34,
+   "tcli_mean": 2.75
+  },
+  "rule_vision": {
+   "n": 200,
+   "correct": 180,
+   "dmg_caught": "0/7",
+   "exc_correct": "5/13",
+   "normal_correct": "175/187",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "x": 200
+   },
+   "t_p50": 0.55,
+   "t_p95": 12.17,
+   "t_mean": 3.26,
+   "tcli_p50": 0.55,
+   "tcli_mean": 3.26
+  },
+  "decisions_q5": {
+   "n": 200,
+   "correct": 191,
+   "dmg_caught": "0/7",
+   "exc_correct": "6/13",
+   "normal_correct": "185/187",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "x": 200
+   },
+   "t_p50": 0.9,
+   "t_p95": 1.44,
+   "t_mean": 0.96,
+   "tcli_p50": 0.9,
+   "tcli_mean": 0.96
+  },
+  "opus_roi": {
+   "n": 200,
+   "correct": 80,
+   "dmg_caught": "4/7",
+   "exc_correct": "6/13",
+   "normal_correct": "74/187",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "x": 200
+   },
+   "t_p50": 0,
+   "t_p95": 6.13,
+   "t_mean": 2.21,
+   "tcli_p50": 0,
+   "tcli_mean": 2.21
+  }
+ },
+ "hard": {
+  "v2": {
+   "n": 100,
+   "correct": 92,
+   "dmg_caught": "17/21",
+   "exc_correct": "47/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.37,
+   "paths": {
+    "decisions": 30,
+    "opus": 37,
+    "rule": 18,
+    "barcode": 15
+   },
+   "t_p50": 4.04,
+   "t_p95": 9.11,
+   "t_mean": 4.73,
+   "tcli_p50": 4.04,
+   "tcli_mean": 5.5
+  },
+  "v2_noflags": {
+   "n": 100,
+   "correct": 92,
+   "dmg_caught": "17/21",
+   "exc_correct": "47/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.3,
+   "paths": {
+    "decisions": 37,
+    "opus": 30,
+    "rule": 18,
+    "barcode": 15
+   },
+   "t_p50": 3.92,
+   "t_p95": 9.11,
+   "t_mean": 4.45,
+   "tcli_p50": 3.92,
+   "tcli_mean": 5.07
+  },
+  "v2_par": {
+   "n": 100,
+   "correct": 95,
+   "dmg_caught": "17/21",
+   "exc_correct": "50/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.36,
+   "paths": {
+    "decisions": 26,
+    "opus": 36,
+    "rule": 18,
+    "barcode": 10,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.48,
+   "t_p95": 8.29,
+   "t_mean": 4.18,
+   "tcli_p50": 3.48,
+   "tcli_mean": 4.94
+  },
+  "rule_vision": {
+   "n": 100,
+   "correct": 56,
+   "dmg_caught": "2/21",
+   "exc_correct": "25/54",
+   "normal_correct": "31/46",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "x": 100
+   },
+   "t_p50": 9.77,
+   "t_p95": 32.83,
+   "t_mean": 20.15,
+   "tcli_p50": 9.77,
+   "tcli_mean": 20.15
+  },
+  "decisions_q5": {
+   "n": 100,
+   "correct": 71,
+   "dmg_caught": "0/21",
+   "exc_correct": "29/54",
+   "normal_correct": "42/46",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "x": 100
+   },
+   "t_p50": 0.79,
+   "t_p95": 1.12,
+   "t_mean": 0.8,
+   "tcli_p50": 0.79,
+   "tcli_mean": 0.8
+  },
+  "opus_roi": {
+   "n": 100,
+   "correct": 94,
+   "dmg_caught": "17/21",
+   "exc_correct": "50/54",
+   "normal_correct": "44/46",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "x": 100
+   },
+   "t_p50": 5.84,
+   "t_p95": 7.02,
+   "t_mean": 5.96,
+   "tcli_p50": 5.84,
+   "tcli_mean": 5.96
+  }
+ },
+ "stream_sensitivity": {
+  "lo0.025_hi0.04_c0.5": [
+   196,
+   "6/7",
+   0.23,
+   3.25
+  ],
+  "lo0.025_hi0.04_c0.6": [
+   196,
+   "6/7",
+   0.235,
+   3.27
+  ],
+  "lo0.025_hi0.04_c0.7": [
+   196,
+   "6/7",
+   0.235,
+   3.27
+  ],
+  "lo0.025_hi0.042_c0.5": [
+   197,
+   "6/7",
+   0.235,
+   3.27
+  ],
+  "lo0.025_hi0.042_c0.6": [
+   197,
+   "6/7",
+   0.24,
+   3.29
+  ],
+  "lo0.025_hi0.042_c0.7": [
+   197,
+   "6/7",
+   0.24,
+   3.29
+  ],
+  "lo0.025_hi0.045_c0.5": [
+   197,
+   "6/7",
+   0.235,
+   3.27
+  ],
+  "lo0.025_hi0.045_c0.6": [
+   197,
+   "6/7",
+   0.24,
+   3.29
+  ],
+  "lo0.025_hi0.045_c0.7": [
+   197,
+   "6/7",
+   0.24,
+   3.29
+  ],
+  "lo0.03_hi0.04_c0.5": [
+   196,
+   "6/7",
+   0.155,
+   2.34
+  ],
+  "lo0.03_hi0.04_c0.6": [
+   196,
+   "6/7",
+   0.165,
+   2.37
+  ],
+  "lo0.03_hi0.04_c0.7": [
+   196,
+   "6/7",
+   0.165,
+   2.37
+  ],
+  "lo0.03_hi0.042_c0.5": [
+   197,
+   "6/7",
+   0.16,
+   2.36
+  ],
+  "lo0.03_hi0.042_c0.6": [
+   197,
+   "6/7",
+   0.17,
+   2.39
+  ],
+  "lo0.03_hi0.042_c0.7": [
+   197,
+   "6/7",
+   0.17,
+   2.39
+  ],
+  "lo0.03_hi0.045_c0.5": [
+   197,
+   "6/7",
+   0.16,
+   2.36
+  ],
+  "lo0.03_hi0.045_c0.6": [
+   197,
+   "6/7",
+   0.17,
+   2.39
+  ],
+  "lo0.03_hi0.045_c0.7": [
+   197,
+   "6/7",
+   0.17,
+   2.39
+  ],
+  "lo0.035_hi0.04_c0.5": [
+   195,
+   "5/7",
+   0.06,
+   1.95
+  ],
+  "lo0.035_hi0.04_c0.6": [
+   195,
+   "5/7",
+   0.07,
+   1.98
+  ],
+  "lo0.035_hi0.04_c0.7": [
+   195,
+   "5/7",
+   0.07,
+   1.98
+  ],
+  "lo0.035_hi0.042_c0.5": [
+   196,
+   "5/7",
+   0.065,
+   1.97
+  ],
+  "lo0.035_hi0.042_c0.6": [
+   196,
+   "5/7",
+   0.075,
+   2.0
+  ],
+  "lo0.035_hi0.042_c0.7": [
+   196,
+   "5/7",
+   0.075,
+   2.0
+  ],
+  "lo0.035_hi0.045_c0.5": [
+   196,
+   "5/7",
+   0.065,
+   1.97
+  ],
+  "lo0.035_hi0.045_c0.6": [
+   196,
+   "5/7",
+   0.075,
+   2.0
+  ],
+  "lo0.035_hi0.045_c0.7": [
+   196,
+   "5/7",
+   0.075,
+   2.0
+  ]
+ }
+}

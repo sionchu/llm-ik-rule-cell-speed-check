@@ -1,0 +1,1477 @@
+{
+ "stream": {
+  "A v2_par(기존)": {
+   "n": 200,
+   "correct": 198,
+   "dmg_caught": "6/7",
+   "exc_correct": "12/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.23,
+   "paths": {
+    "barcode": 112,
+    "decisions": 33,
+    "opus": 46,
+    "rule": 8,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.34,
+   "t_p95": 6.41,
+   "t_mean": 2.39,
+   "tcli_p50": 1.34,
+   "tcli_mean": 2.39,
+   "llm_share": 0.23,
+   "not_run": 0,
+   "usd_per_10k": 39,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "stream_0172",
+     "damaged_wet",
+     "REJECT",
+     "JEJU",
+     "decisions"
+    ]
+   ]
+  },
+  "B1 의심하한 0.020": {
+   "n": 200,
+   "correct": 198,
+   "dmg_caught": "6/7",
+   "exc_correct": "12/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.315,
+   "paths": {
+    "opus_NOT_RUN": 61,
+    "decisions": 16,
+    "opus": 63,
+    "rule": 8,
+    "barcode": 51,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.34,
+   "t_p95": 6.93,
+   "t_mean": 2.71,
+   "tcli_p50": 1.34,
+   "tcli_mean": 2.71,
+   "llm_share": 0.315,
+   "not_run": 61,
+   "usd_per_10k": 52,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "stream_0172",
+     "damaged_wet",
+     "REJECT",
+     "JEJU",
+     "decisions"
+    ]
+   ]
+  },
+  "B2 의심하한 0.015": {
+   "n": 200,
+   "correct": 198,
+   "dmg_caught": "6/7",
+   "exc_correct": "12/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.325,
+   "paths": {
+    "opus_NOT_RUN": 67,
+    "decisions": 14,
+    "opus": 65,
+    "rule": 8,
+    "barcode": 45,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.34,
+   "t_p95": 7.06,
+   "t_mean": 2.75,
+   "tcli_p50": 1.34,
+   "tcli_mean": 2.75,
+   "llm_share": 0.325,
+   "not_run": 67,
+   "usd_per_10k": 54,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "stream_0172",
+     "damaged_wet",
+     "REJECT",
+     "JEJU",
+     "decisions"
+    ]
+   ]
+  },
+  "B3 의심하한 0.010": {
+   "n": 200,
+   "correct": 198,
+   "dmg_caught": "6/7",
+   "exc_correct": "12/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.34,
+   "paths": {
+    "opus_NOT_RUN": 85,
+    "decisions": 11,
+    "opus": 68,
+    "rule": 8,
+    "barcode": 27,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.34,
+   "t_p95": 7.09,
+   "t_mean": 2.8,
+   "tcli_p50": 1.34,
+   "tcli_mean": 2.8,
+   "llm_share": 0.34,
+   "not_run": 85,
+   "usd_per_10k": 56,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "stream_0172",
+     "damaged_wet",
+     "REJECT",
+     "JEJU",
+     "decisions"
+    ]
+   ]
+  },
+  "B4 하한0.015+상한0.035": {
+   "n": 200,
+   "correct": 189,
+   "dmg_caught": "6/7",
+   "exc_correct": "12/13",
+   "normal_correct": "177/187",
+   "false_reject": 9,
+   "opus_share": 0.28,
+   "paths": {
+    "opus_NOT_RUN": 67,
+    "decisions": 14,
+    "opus": 56,
+    "rule": 17,
+    "barcode": 45,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.26,
+   "t_p95": 6.93,
+   "t_mean": 2.59,
+   "tcli_p50": 1.26,
+   "tcli_mean": 2.59,
+   "llm_share": 0.28,
+   "not_run": 67,
+   "usd_per_10k": 47,
+   "errors": [
+    [
+     "stream_0004",
+     "none",
+     "GANGWON",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0065",
+     "none",
+     "INCHEON",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0066",
+     "none",
+     "SEOUL_NORTH",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0087",
+     "none",
+     "INCHEON",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0095",
+     "none",
+     "SEOUL_NORTH",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "stream_0123",
+     "none",
+     "ULSAN",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0156",
+     "none",
+     "GYEONGGI_SOUTH",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0165",
+     "none",
+     "JEJU",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "stream_0172",
+     "damaged_wet",
+     "REJECT",
+     "JEJU",
+     "decisions"
+    ],
+    [
+     "stream_0193",
+     "none",
+     "DAEGU",
+     "REJECT",
+     "rule"
+    ]
+   ]
+  },
+  "C v3 얼룩색 규칙": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.225,
+   "paths": {
+    "barcode": 112,
+    "decisions": 32,
+    "opus": 45,
+    "rule": 10,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.61,
+   "t_p95": 6.78,
+   "t_mean": 2.68,
+   "tcli_p50": 1.61,
+   "tcli_mean": 2.68,
+   "llm_share": 0.225,
+   "not_run": 0,
+   "usd_per_10k": 38,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "D1 v3 + 밝기의심 제거": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.1,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "opus": 20,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.45,
+   "t_p95": 4.99,
+   "t_mean": 2.25,
+   "tcli_p50": 1.45,
+   "tcli_mean": 2.25,
+   "llm_share": 0.1,
+   "not_run": 0,
+   "usd_per_10k": 18,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "D2 v3 + 밝기의심 제거 + 확신0.5": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.09,
+   "paths": {
+    "barcode": 128,
+    "decisions": 43,
+    "rule": 10,
+    "opus": 18,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.45,
+   "t_p95": 4.93,
+   "t_mean": 2.22,
+   "tcli_p50": 1.45,
+   "tcli_mean": 2.22,
+   "llm_share": 0.09,
+   "not_run": 0,
+   "usd_per_10k": 16,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "D3 v3 + 밝기의심 제거 + 확신0.7": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.1,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "opus": 20,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.45,
+   "t_p95": 4.99,
+   "t_mean": 2.25,
+   "tcli_p50": 1.45,
+   "tcli_mean": 2.25,
+   "llm_share": 0.1,
+   "not_run": 0,
+   "usd_per_10k": 18,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "D4 v3 + 밝기의심·파손플래그 제거": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.1,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "opus": 20,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.45,
+   "t_p95": 4.99,
+   "t_mean": 2.25,
+   "tcli_p50": 1.45,
+   "tcli_mean": 2.25,
+   "llm_share": 0.1,
+   "not_run": 0,
+   "usd_per_10k": 18,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F1 v3 얼룩색+찢김색(밝기검사 대체)": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.1,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "opus": 20,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.11,
+   "t_p95": 4.52,
+   "t_mean": 1.87,
+   "tcli_p50": 1.11,
+   "tcli_mean": 1.87,
+   "llm_share": 0.1,
+   "not_run": 0,
+   "usd_per_10k": 18,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F2 F1 + 확신0.5": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.09,
+   "paths": {
+    "barcode": 128,
+    "decisions": 43,
+    "rule": 10,
+    "opus": 18,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.11,
+   "t_p95": 4.52,
+   "t_mean": 1.84,
+   "tcli_p50": 1.11,
+   "tcli_mean": 1.84,
+   "llm_share": 0.09,
+   "not_run": 0,
+   "usd_per_10k": 16,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F3 F1 + 확신0.7": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.1,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "opus": 20,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.11,
+   "t_p95": 4.52,
+   "t_mean": 1.87,
+   "tcli_p50": 1.11,
+   "tcli_mean": 1.87,
+   "llm_share": 0.1,
+   "not_run": 0,
+   "usd_per_10k": 18,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F4 F1 + 파손플래그 제거": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.1,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "opus": 20,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.11,
+   "t_p95": 4.52,
+   "t_mean": 1.87,
+   "tcli_p50": 1.11,
+   "tcli_mean": 1.87,
+   "llm_share": 0.1,
+   "not_run": 0,
+   "usd_per_10k": 18,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F5 F4 + 확신0.5": {
+   "n": 200,
+   "correct": 199,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "186/187",
+   "false_reject": 0,
+   "opus_share": 0.09,
+   "paths": {
+    "barcode": 128,
+    "decisions": 43,
+    "rule": 10,
+    "opus": 18,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.11,
+   "t_p95": 4.52,
+   "t_mean": 1.84,
+   "tcli_p50": 1.11,
+   "tcli_mean": 1.84,
+   "llm_share": 0.09,
+   "not_run": 0,
+   "usd_per_10k": 16,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "E1 v2 + 넘어간 건 Fable": {
+   "n": 200,
+   "correct": 196,
+   "dmg_caught": "5/7",
+   "exc_correct": "11/13",
+   "normal_correct": "185/187",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "barcode": 112,
+    "decisions": 33,
+    "fable": 15,
+    "rule": 8,
+    "fable_NOT_RUN": 31,
+    "decisions_flag": 1
+   },
+   "t_p50": 1.11,
+   "t_p95": 6.05,
+   "t_mean": 1.83,
+   "tcli_p50": 1.11,
+   "tcli_mean": 1.83,
+   "llm_share": 0.075,
+   "not_run": 31,
+   "usd_per_10k": 26,
+   "errors": [
+    [
+     "stream_0085",
+     "damaged_wet",
+     "REJECT",
+     "DAEGU",
+     "fable_NOT_RUN"
+    ],
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "fable"
+    ],
+    [
+     "stream_0172",
+     "damaged_wet",
+     "REJECT",
+     "JEJU",
+     "decisions"
+    ],
+    [
+     "stream_0190",
+     "none",
+     "GWANGJU",
+     "MANUAL",
+     "fable_NOT_RUN"
+    ]
+   ]
+  },
+  "E2 F4 + Fable": {
+   "n": 200,
+   "correct": 198,
+   "dmg_caught": "7/7",
+   "exc_correct": "13/13",
+   "normal_correct": "185/187",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "barcode": 128,
+    "decisions": 41,
+    "rule": 10,
+    "fable_NOT_RUN": 14,
+    "decisions_flag": 1,
+    "fable": 6
+   },
+   "t_p50": 1.05,
+   "t_p95": 3.39,
+   "t_mean": 1.62,
+   "tcli_p50": 1.05,
+   "tcli_mean": 1.62,
+   "llm_share": 0.03,
+   "not_run": 14,
+   "usd_per_10k": 12,
+   "errors": [
+    [
+     "stream_0117",
+     "none",
+     "GYEONGGI_NORTH",
+     "RESCAN",
+     "fable"
+    ],
+    [
+     "stream_0190",
+     "none",
+     "GWANGJU",
+     "MANUAL",
+     "fable_NOT_RUN"
+    ]
+   ]
+  }
+ },
+ "hard": {
+  "A v2_par(기존)": {
+   "n": 100,
+   "correct": 95,
+   "dmg_caught": "17/21",
+   "exc_correct": "50/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.36,
+   "paths": {
+    "decisions": 26,
+    "opus": 36,
+    "rule": 18,
+    "barcode": 10,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.48,
+   "t_p95": 8.29,
+   "t_mean": 4.18,
+   "tcli_p50": 3.48,
+   "tcli_mean": 4.18,
+   "llm_share": 0.36,
+   "not_run": 0,
+   "usd_per_10k": 60,
+   "errors": [
+    [
+     "hard_0005",
+     "damaged_wet",
+     "REJECT",
+     "GYEONGGI_SOUTH",
+     "decisions"
+    ],
+    [
+     "hard_0038",
+     "damaged_wet",
+     "REJECT",
+     "DAEGU",
+     "decisions"
+    ],
+    [
+     "hard_0041",
+     "damaged_wet",
+     "REJECT",
+     "DAEJEON",
+     "opus"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0087",
+     "damaged_wet",
+     "REJECT",
+     "MANUAL",
+     "opus"
+    ]
+   ]
+  },
+  "B1 의심하한 0.020": {
+   "n": 100,
+   "correct": 96,
+   "dmg_caught": "18/21",
+   "exc_correct": "51/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.54,
+   "paths": {
+    "decisions": 12,
+    "opus": 54,
+    "rule": 18,
+    "barcode": 6,
+    "decisions_flag": 10
+   },
+   "t_p50": 4.98,
+   "t_p95": 8.29,
+   "t_mean": 4.83,
+   "tcli_p50": 4.98,
+   "tcli_mean": 4.83,
+   "llm_share": 0.54,
+   "not_run": 0,
+   "usd_per_10k": 88,
+   "errors": [
+    [
+     "hard_0005",
+     "damaged_wet",
+     "REJECT",
+     "GYEONGGI_SOUTH",
+     "decisions"
+    ],
+    [
+     "hard_0041",
+     "damaged_wet",
+     "REJECT",
+     "DAEJEON",
+     "opus"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0087",
+     "damaged_wet",
+     "REJECT",
+     "MANUAL",
+     "opus"
+    ]
+   ]
+  },
+  "B2 의심하한 0.015": {
+   "n": 100,
+   "correct": 97,
+   "dmg_caught": "19/21",
+   "exc_correct": "52/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.55,
+   "paths": {
+    "decisions": 11,
+    "opus": 55,
+    "rule": 18,
+    "barcode": 6,
+    "decisions_flag": 10
+   },
+   "t_p50": 5.08,
+   "t_p95": 8.29,
+   "t_mean": 4.88,
+   "tcli_p50": 5.08,
+   "tcli_mean": 4.88,
+   "llm_share": 0.55,
+   "not_run": 0,
+   "usd_per_10k": 90,
+   "errors": [
+    [
+     "hard_0041",
+     "damaged_wet",
+     "REJECT",
+     "DAEJEON",
+     "opus"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0087",
+     "damaged_wet",
+     "REJECT",
+     "MANUAL",
+     "opus"
+    ]
+   ]
+  },
+  "B3 의심하한 0.010": {
+   "n": 100,
+   "correct": 97,
+   "dmg_caught": "19/21",
+   "exc_correct": "52/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.6,
+   "paths": {
+    "decisions": 9,
+    "opus": 60,
+    "rule": 18,
+    "barcode": 3,
+    "decisions_flag": 10
+   },
+   "t_p50": 5.36,
+   "t_p95": 8.29,
+   "t_mean": 5.08,
+   "tcli_p50": 5.36,
+   "tcli_mean": 5.08,
+   "llm_share": 0.6,
+   "not_run": 0,
+   "usd_per_10k": 98,
+   "errors": [
+    [
+     "hard_0041",
+     "damaged_wet",
+     "REJECT",
+     "DAEJEON",
+     "opus"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0087",
+     "damaged_wet",
+     "REJECT",
+     "MANUAL",
+     "opus"
+    ]
+   ]
+  },
+  "B4 하한0.015+상한0.035": {
+   "n": 100,
+   "correct": 94,
+   "dmg_caught": "19/21",
+   "exc_correct": "51/54",
+   "normal_correct": "43/46",
+   "false_reject": 3,
+   "opus_share": 0.48,
+   "paths": {
+    "decisions": 11,
+    "rule": 25,
+    "opus": 48,
+    "barcode": 6,
+    "decisions_flag": 10
+   },
+   "t_p50": 4.38,
+   "t_p95": 8.18,
+   "t_mean": 4.59,
+   "tcli_p50": 4.38,
+   "tcli_mean": 4.59,
+   "llm_share": 0.48,
+   "not_run": 0,
+   "usd_per_10k": 79,
+   "errors": [
+    [
+     "hard_0001",
+     "none",
+     "GYEONGGI_NORTH",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "hard_0021",
+     "none",
+     "GWANGJU",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "hard_0031",
+     "conflict",
+     "MANUAL",
+     "REJECT",
+     "rule"
+    ],
+    [
+     "hard_0041",
+     "damaged_wet",
+     "REJECT",
+     "DAEJEON",
+     "opus"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0087",
+     "damaged_wet",
+     "REJECT",
+     "MANUAL",
+     "opus"
+    ]
+   ]
+  },
+  "C v3 얼룩색 규칙": {
+   "n": 100,
+   "correct": 99,
+   "dmg_caught": "21/21",
+   "exc_correct": "54/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.28,
+   "paths": {
+    "decisions": 24,
+    "opus": 28,
+    "rule": 28,
+    "barcode": 10,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.53,
+   "t_p95": 7.98,
+   "t_mean": 4.2,
+   "tcli_p50": 3.53,
+   "tcli_mean": 4.2,
+   "llm_share": 0.28,
+   "not_run": 0,
+   "usd_per_10k": 47,
+   "errors": [
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "D1 v3 + 밝기의심 제거": {
+   "n": 100,
+   "correct": 97,
+   "dmg_caught": "19/21",
+   "exc_correct": "52/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.19,
+   "paths": {
+    "decisions": 28,
+    "opus": 19,
+    "rule": 28,
+    "barcode": 15,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.45,
+   "t_p95": 7.79,
+   "t_mean": 3.85,
+   "tcli_p50": 3.45,
+   "tcli_mean": 3.85,
+   "llm_share": 0.19,
+   "not_run": 0,
+   "usd_per_10k": 32,
+   "errors": [
+    [
+     "hard_0056",
+     "damaged_torn",
+     "REJECT",
+     "GYEONGGI_NORTH",
+     "barcode"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0089",
+     "damaged_torn",
+     "REJECT",
+     "SEOUL_SOUTH",
+     "decisions"
+    ]
+   ]
+  },
+  "D2 v3 + 밝기의심 제거 + 확신0.5": {
+   "n": 100,
+   "correct": 96,
+   "dmg_caught": "19/21",
+   "exc_correct": "51/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.15,
+   "paths": {
+    "decisions": 32,
+    "opus": 15,
+    "rule": 28,
+    "barcode": 15,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.44,
+   "t_p95": 6.9,
+   "t_mean": 3.71,
+   "tcli_p50": 3.44,
+   "tcli_mean": 3.71,
+   "llm_share": 0.15,
+   "not_run": 0,
+   "usd_per_10k": 26,
+   "errors": [
+    [
+     "hard_0006",
+     "conflict",
+     "MANUAL",
+     "ULSAN",
+     "decisions"
+    ],
+    [
+     "hard_0056",
+     "damaged_torn",
+     "REJECT",
+     "GYEONGGI_NORTH",
+     "barcode"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0089",
+     "damaged_torn",
+     "REJECT",
+     "SEOUL_SOUTH",
+     "decisions"
+    ]
+   ]
+  },
+  "D3 v3 + 밝기의심 제거 + 확신0.7": {
+   "n": 100,
+   "correct": 97,
+   "dmg_caught": "20/21",
+   "exc_correct": "53/54",
+   "normal_correct": "44/46",
+   "false_reject": 0,
+   "opus_share": 0.25,
+   "paths": {
+    "opus": 25,
+    "decisions": 22,
+    "rule": 28,
+    "barcode": 15,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.5,
+   "t_p95": 7.8,
+   "t_mean": 4.07,
+   "tcli_p50": 3.5,
+   "tcli_mean": 4.07,
+   "llm_share": 0.25,
+   "not_run": 0,
+   "usd_per_10k": 42,
+   "errors": [
+    [
+     "hard_0030",
+     "none",
+     "ULSAN",
+     "MANUAL",
+     "opus"
+    ],
+    [
+     "hard_0056",
+     "damaged_torn",
+     "REJECT",
+     "GYEONGGI_NORTH",
+     "barcode"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "D4 v3 + 밝기의심·파손플래그 제거": {
+   "n": 100,
+   "correct": 97,
+   "dmg_caught": "19/21",
+   "exc_correct": "52/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.18,
+   "paths": {
+    "decisions": 28,
+    "opus": 18,
+    "rule": 28,
+    "barcode": 16,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.45,
+   "t_p95": 7.79,
+   "t_mean": 3.82,
+   "tcli_p50": 3.45,
+   "tcli_mean": 3.82,
+   "llm_share": 0.18,
+   "not_run": 0,
+   "usd_per_10k": 31,
+   "errors": [
+    [
+     "hard_0056",
+     "damaged_torn",
+     "REJECT",
+     "GYEONGGI_NORTH",
+     "barcode"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ],
+    [
+     "hard_0089",
+     "damaged_torn",
+     "REJECT",
+     "SEOUL_SOUTH",
+     "decisions"
+    ]
+   ]
+  },
+  "F1 v3 얼룩색+찢김색(밝기검사 대체)": {
+   "n": 100,
+   "correct": 99,
+   "dmg_caught": "21/21",
+   "exc_correct": "54/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.19,
+   "paths": {
+    "decisions": 27,
+    "opus": 19,
+    "rule": 30,
+    "barcode": 14,
+    "decisions_flag": 10
+   },
+   "t_p50": 2.95,
+   "t_p95": 7.2,
+   "t_mean": 3.37,
+   "tcli_p50": 2.95,
+   "tcli_mean": 3.37,
+   "llm_share": 0.19,
+   "not_run": 0,
+   "usd_per_10k": 32,
+   "errors": [
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F2 F1 + 확신0.5": {
+   "n": 100,
+   "correct": 98,
+   "dmg_caught": "21/21",
+   "exc_correct": "53/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.15,
+   "paths": {
+    "decisions": 31,
+    "opus": 15,
+    "rule": 30,
+    "barcode": 14,
+    "decisions_flag": 10
+   },
+   "t_p50": 2.91,
+   "t_p95": 6.46,
+   "t_mean": 3.23,
+   "tcli_p50": 2.91,
+   "tcli_mean": 3.23,
+   "llm_share": 0.15,
+   "not_run": 0,
+   "usd_per_10k": 26,
+   "errors": [
+    [
+     "hard_0006",
+     "conflict",
+     "MANUAL",
+     "ULSAN",
+     "decisions"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F3 F1 + 확신0.7": {
+   "n": 100,
+   "correct": 98,
+   "dmg_caught": "21/21",
+   "exc_correct": "54/54",
+   "normal_correct": "44/46",
+   "false_reject": 0,
+   "opus_share": 0.24,
+   "paths": {
+    "opus": 24,
+    "decisions": 22,
+    "rule": 30,
+    "barcode": 14,
+    "decisions_flag": 10
+   },
+   "t_p50": 2.99,
+   "t_p95": 7.2,
+   "t_mean": 3.55,
+   "tcli_p50": 2.99,
+   "tcli_mean": 3.55,
+   "llm_share": 0.24,
+   "not_run": 0,
+   "usd_per_10k": 40,
+   "errors": [
+    [
+     "hard_0030",
+     "none",
+     "ULSAN",
+     "MANUAL",
+     "opus"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F4 F1 + 파손플래그 제거": {
+   "n": 100,
+   "correct": 99,
+   "dmg_caught": "21/21",
+   "exc_correct": "54/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.18,
+   "paths": {
+    "decisions": 27,
+    "opus": 18,
+    "rule": 30,
+    "barcode": 15,
+    "decisions_flag": 10
+   },
+   "t_p50": 2.95,
+   "t_p95": 7.2,
+   "t_mean": 3.34,
+   "tcli_p50": 2.95,
+   "tcli_mean": 3.34,
+   "llm_share": 0.18,
+   "not_run": 0,
+   "usd_per_10k": 31,
+   "errors": [
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "F5 F4 + 확신0.5": {
+   "n": 100,
+   "correct": 98,
+   "dmg_caught": "21/21",
+   "exc_correct": "53/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.14,
+   "paths": {
+    "decisions": 31,
+    "opus": 14,
+    "rule": 30,
+    "barcode": 15,
+    "decisions_flag": 10
+   },
+   "t_p50": 2.91,
+   "t_p95": 6.46,
+   "t_mean": 3.2,
+   "tcli_p50": 2.91,
+   "tcli_mean": 3.2,
+   "llm_share": 0.14,
+   "not_run": 0,
+   "usd_per_10k": 24,
+   "errors": [
+    [
+     "hard_0006",
+     "conflict",
+     "MANUAL",
+     "ULSAN",
+     "decisions"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "opus"
+    ]
+   ]
+  },
+  "E1 v2 + 넘어간 건 Fable": {
+   "n": 100,
+   "correct": 96,
+   "dmg_caught": "18/21",
+   "exc_correct": "51/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "decisions": 26,
+    "fable": 36,
+    "rule": 18,
+    "barcode": 10,
+    "decisions_flag": 10
+   },
+   "t_p50": 3.48,
+   "t_p95": 8.74,
+   "t_mean": 4.28,
+   "tcli_p50": 3.48,
+   "tcli_mean": 4.28,
+   "llm_share": 0.36,
+   "not_run": 0,
+   "usd_per_10k": 117,
+   "errors": [
+    [
+     "hard_0005",
+     "damaged_wet",
+     "REJECT",
+     "GYEONGGI_SOUTH",
+     "decisions"
+    ],
+    [
+     "hard_0038",
+     "damaged_wet",
+     "REJECT",
+     "DAEGU",
+     "decisions"
+    ],
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "fable"
+    ],
+    [
+     "hard_0087",
+     "damaged_wet",
+     "REJECT",
+     "SEOUL_NORTH",
+     "fable"
+    ]
+   ]
+  },
+  "E2 F4 + Fable": {
+   "n": 100,
+   "correct": 99,
+   "dmg_caught": "21/21",
+   "exc_correct": "54/54",
+   "normal_correct": "45/46",
+   "false_reject": 0,
+   "opus_share": 0.0,
+   "paths": {
+    "decisions": 27,
+    "fable": 18,
+    "rule": 30,
+    "barcode": 15,
+    "decisions_flag": 10
+   },
+   "t_p50": 2.95,
+   "t_p95": 6.39,
+   "t_mean": 3.32,
+   "tcli_p50": 2.95,
+   "tcli_mean": 3.32,
+   "llm_share": 0.18,
+   "not_run": 0,
+   "usd_per_10k": 60,
+   "errors": [
+    [
+     "hard_0082",
+     "none",
+     "SEOUL_SOUTH",
+     "RESCAN",
+     "fable"
+    ]
+   ]
+  }
+ }
+}

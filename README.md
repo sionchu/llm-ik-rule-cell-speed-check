@@ -5,7 +5,7 @@ This repo measures that trade-off in one simulated cell: same parcels, same came
 
 ![Same parcel, three deciders](docs/frames/en_17.5.jpg)
 
-Video (32 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
+Video (43 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
 
 ## Setup
 
@@ -63,10 +63,47 @@ Break-even: about ₩20–40 (≈ $0.014–0.029) per LLM decision. CLI prices i
 
 Limits: simulation and synthetic data, not field numbers; one robot model and one camera; latency measured through CLI tools on a shared GPU; local Qwen3-VL run is NOT_RUN for this set.
 
+## Robot motion included (`img/_total_time.py`, `img/_total_time_v3.py`)
+
+Time per box = decision + pick-and-place (6.144 s to the induct, 4.53 s to the tote, measured in the cell). Two layouts: the robot waits for the decision, or the next box is decided while the robot moves the current one.
+
+| fc_stream 200 | robot waits | decided while moving |
+|---|---|---|
+| Rule | 553 boxes/h | 646 |
+| Claude Opus 5.5 | 338 | 593 |
+| Claude Fable 5.2 | 335 | 587 |
+
+The rule's false alarms take the shorter tote path, which flatters its rate.
+
+## Part 2: rebuilt pipeline (parcel-sort set, `results/RESULTS_v3.md`)
+
+A second synthetic set (parcel sorting to chutes, `img/sets/stream.jsonl` 200 + `hard.jsonl` 100) with a rebuilt decider:
+
+- In parallel: barcode + scale + a local damage check (CPU, ~0.4 s) and one **Gemini Decisions** call (`img/decide_decisions.py`, probabilities over chutes + 5 flags, p50 0.9 s; needs `GEMINI_API_KEY`).
+- Damage sure → REJECT; overweight / red label / Decisions hazmat flag → MANUAL; barcode read and no flags → barcode chute; else the Decisions answer.
+- Only doubtful boxes (damage suspect, confidence < 0.6, address-conflict flag) go to Claude Opus 5.5.
+- v3 damage check (`img/damage_check_v3.py`): absolute stain colour and tear-interior colour. The v2 check measured darkness against the box's median brightness, so a wide wet stain hid itself.
+
+Thresholds chosen on stream, applied unchanged to hard. Offline evaluation from stored predictions (`img/eval_v2.py`, `img/eval_v3.py`), no new API calls.
+
+| hard 100 (54% exceptions, 21 damaged) | correct | damage caught | Opus share | mean decision | boxes/h, decided while moving | robot waits |
+|---|---|---|---|---|---|---|
+| Rule + vision (OCR) | 56 | 2/21 | 0 | 20.2 s | 167 | 141 |
+| Gemini Decisions only | 71 | 0/21 | 0 | 0.8 s | 649 | 567 |
+| Claude Opus 5.5 on every box | 94 | 17/21 | 100% | 3.9 s* | 672 | 393 |
+| **Rebuilt (v3 F4)** | **99** | **21/21** | **18%** | **3.3 s** | **649** | **419** |
+
+stream 200: rebuilt 199/200, Opus on 10% of boxes, mean 1.9 s, 594 boxes/h while moving.
+Once the decision fits inside the move, the robot sets the rate; the gain is accuracy and cost.
+\* Opus time here is server time (`api_ms`, close to a direct API call), shorter than the 4.6 s CLI round trip in part 1.
+
+Limits: synthetic stains are flat ellipses, so colour separation is far cleaner than on real cartons. The v3 colour ranges were set after looking at missed images (hard included), so hard is not a strict holdout. Decisions not run on the fc set (NOT_RUN).
+
 ## Files
 
 | Path | What |
 |---|---|
+| `img/eval_v2.py`, `img/eval_v3.py`, `img/damage_check*.py`, `img/decide_decisions.py` | Part 2 pipeline and offline evaluation |
 | `isaac/sort_cell.py` | Isaac cell: `--capture` pick-camera images, `--cycle` robot cycle times, `--video id:dest` front-view frames. Needs a small kinematics helper (`cellkit`: RB16 FK/IK and move timing) from a separate project, set `CELLKIT_DIR` |
 | `img/gen_fc_set.py`, `img/fc_common.py` | synthetic parcel set + label/top textures, policy text |
 | `img/decide_rule_fc.py` | rule baseline |

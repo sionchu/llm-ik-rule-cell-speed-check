@@ -1,0 +1,36 @@
+{
+ "v3_f4_stream": {
+  "n": 200,
+  "correct": 199,
+  "dec_mean": 1.87,
+  "within_cycle": 0.97,
+  "seq_mean": 7.91,
+  "pipe_mean": 6.06,
+  "pph_seq": 455,
+  "pph_pipe": 594
+ },
+ "v3_f4_hard": {
+  "n": 100,
+  "correct": 99,
+  "dec_mean": 3.34,
+  "within_cycle": 0.81,
+  "seq_mean": 8.59,
+  "pipe_mean": 5.55,
+  "pph_seq": 419,
+  "pph_pipe": 649
+ },
+ "opus_alone_stream": {
+  "n": 82,
+  "correct": 80,
+  "dec_mean": 3.73,
+  "pph_seq": 370,
+  "pph_pipe": 597
+ },
+ "opus_alone_hard": {
+  "n": 100,
+  "correct": 94,
+  "dec_mean": 3.88,
+  "pph_seq": 393,
+  "pph_pipe": 672
+ }
+}
