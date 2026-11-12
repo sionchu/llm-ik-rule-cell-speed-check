@@ -1,0 +1,76 @@
+{
+ "direct_est": {
+  "image_tokens": 1979,
+  "input_tokens": 2879
+ },
+ "rule": {
+  "miss": 1.3953488372093024,
+  "fa": 3501.6585365853657,
+  "err_krw": 260963.31253545094,
+  "api_krw": 0
+ },
+ "gate_B_calls_per10k": 3530,
+ "opus": {
+  "latency_med_s": 4.67,
+  "cli_usd_per_call": 0.061733694666666665,
+  "A": {
+   "miss": 2.4418604651162794,
+   "fa": 875.4146341463414,
+   "err_krw": 167798.96766874645,
+   "calls": 10000,
+   "api_krw_cli": 864271.7253333334,
+   "api_krw_direct_est": 225215.1477333333
+  },
+  "B": {
+   "miss": 3.1395348837209305,
+   "fa": 632.2439024390244,
+   "err_krw": 188610.62393647194,
+   "calls": 3530,
+   "api_krw_cli": 305087.9190426667,
+   "api_krw_direct_est": 79500.94714986665
+  },
+  "direct_usd_per_call_est": 0.016086796266666665
+ },
+ "fable": {
+  "latency_med_s": 4.64,
+  "cli_usd_per_call": 0.122328994,
+  "A": {
+   "miss": 0.0,
+   "fa": 1459.0243902439024,
+   "err_krw": 80246.34146341463,
+   "calls": 10000,
+   "api_krw_cli": 1712605.9159999997,
+   "api_krw_direct_est": 446277.23327656183
+  },
+  "B": {
+   "miss": 1.3953488372093024,
+   "fa": 972.6829268292684,
+   "err_krw": 121869.65399886557,
+   "calls": 3530,
+   "api_krw_cli": 604549.888348,
+   "api_krw_direct_est": 157535.8633466263
+  },
+  "direct_usd_per_call_est": 0.03187694523404013
+ },
+ "flash": {
+  "latency_med_s": 10.64,
+  "cli_usd_per_call": null,
+  "A": {
+   "miss": 2.4418604651162794,
+   "fa": 1264.4878048780488,
+   "err_krw": 189197.99205899035,
+   "calls": 10000,
+   "api_krw_cli": null,
+   "api_krw_direct_est": null
+  },
+  "B": {
+   "miss": 3.488372093023256,
+   "fa": 924.0487804878048,
+   "err_krw": 221752.91548496878,
+   "calls": 3530,
+   "api_krw_cli": null,
+   "api_krw_direct_est": null
+  },
+  "direct_usd_per_call_est": null
+ }
+}

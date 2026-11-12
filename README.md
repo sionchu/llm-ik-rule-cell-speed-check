@@ -1,0 +1,81 @@
+# Is an LLM too slow for a robot cell? — Rule + LLM + IK in an Isaac Sim outbound-check cell
+
+**Question.** For physical AI in manufacturing *today*, a practical stack is **rules + an LLM for judgment + IK for motion**, instead of an end-to-end learned policy. A common pushback from logistics engineers is **speed**: an LLM call takes seconds, a sorting line does not wait.
+This repo measures that trade-off in one simulated cell: same parcels, same camera, three deciders side by side.
+
+![Same parcel, three deciders](docs/frames/en_17.5.jpg)
+
+Video (32 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
+
+## Setup
+
+| Item | What |
+|---|---|
+| Cell | Isaac Sim 6.0.1, infeed conveyor → overhead pick camera (3072×2304) → 6-axis cobot (RB16-900E model) with suction → sorter induct (OK) or reject tote (exception). Kinematic motion: Lula IK + trapezoid joint timing, no physics |
+| Task | Fulfilment-centre outbound check, 6 outputs: OK · DAMAGED · RELABEL · SPEC_OUT (weight) · PACK_UNFIT · MANUAL (wrong-order label) |
+| Data | 300 synthetic parcels (generic "FC SHIP LABEL", no real brand). `fc_stream` 200 (~5% faults) and `fc_hard` 100 (~86% faults incl. forms no rule was written for: crushed corner, oil stain, orange Korean fragile sticker, wrong-order label with smudged barcode) |
+| Deciders | **Rule**: order-barcode match (zxing, rotation sweep) + weight ±5% + colour checks + red sticker template. **Claude Opus 5.5** and **Claude Fable 5.2** (low effort): parcel crop + label crop + order text. Gemini Flash also run (reported below, not in the video) |
+| Gate | Rule first; only parcels the rule flags go to the LLM (rule-OK ships) |
+
+## Results (measured unless marked)
+
+**Accuracy** (`RESULTS_fc.md`)
+
+| Decider | stream 200 correct | faults shipped as OK | OK parcels sent to a human | hard 100 correct | faults shipped as OK |
+|---|---|---|---|---|---|
+| Rule | 134 | 0 / 9 | 62 / 191 | 54 | 4 / 86 |
+| Gemini Flash | 176 | 0 / 9 | 23 / 191 | 83 | 7 / 86 |
+| Claude Opus 5.5 | 183 | 0 / 9 | 15 / 191 | 87 | 7 / 86 |
+| Claude Fable 5.2 | 172 | 0 / 9 | 27 / 191 | **94** | **0 / 86** |
+
+Opus and Flash missed mostly the crushed corners. LLM false alarms are mostly creased or glare labels sent to RELABEL. 42 of the rule's 62 false alarms are labels whose barcode the rule could not decode in the render (a limit of this rule, recorded as such).
+
+**Speed** (median, end to end)
+
+| | time |
+|---|---|
+| Rule | 0.5 s (stream) to 2.0 s (hard, rotation sweep) |
+| Claude Opus 5.5 / Fable 5.2 | 4.7 s / 4.6 s via CLI (API part ~3.1 s) |
+| Gemini Flash | 10.6 s via CLI |
+| Robot pick-and-place cycle in this cell | 4.5 s (tote) to 6.1 s (induct) |
+| Manual remote video coding (industry figure, BEUMER) | ~15 s |
+| High-speed parcel induction robots (Kindred 1,600–2,000 PPH, Plus One 2,500+ PPH) | ~1.4–2.3 s per parcel |
+
+**Cost per 10,000 parcels** (fault rate 0.3% assumed; missed fault $35 ≈ ₩49,000; needless human check ₩55 ≈ $0.04; USD at ₩1,400) — `img/cost10k.py` → `results/cost10k.json`
+
+| Setup | errors + checks | LLM API | total |
+|---|---|---|---|
+| Rule only | $186 (₩26.1만) | – | **$186 (₩26.1만)** |
+| Opus on every parcel (measured CLI price $0.062 ≈ ₩86 / call) | $120 (₩16.8만) | $617 (₩86.4만) | $737 (₩103만) |
+| Fable on every parcel (measured CLI price $0.122 ≈ ₩171 / call) | $57 (₩8.0만) | $1,223 (₩171만) | $1,281 (₩179만) |
+| Rule → flagged ~35% → Opus, direct API (**estimate**) | $135 (₩18.9만) | $57 (₩8.0만) | $192 (₩26.9만) |
+| Rule → flagged ~35% → Fable, direct API (**estimate**) | $87 (₩12.2만) | $113 (₩15.8만) | $200 (₩28.0만) |
+
+Break-even: about ₩20–40 (≈ $0.014–0.029) per LLM decision. CLI prices include the CLI's own system prompt, so they are an upper bound; the direct-API estimate counts only our prompt and two image crops (~2.9k input tokens, Opus $4/$20 per MTok, Fable scaled by the measured CLI price ratio). Flash price: not measured.
+
+## What this does and does not show
+
+1. **Speed is fine where the takt is seconds.** In a cobot cell (here 4.5–6.1 s per pick; aerospace drilling and assembly cells are slower still) an LLM decision of ~4–5 s is about one cycle, and ~3x faster than a human.
+2. **The speed concern is valid for high-speed sortation.** At 1,600–2,500 PPH (1.4–2.3 s per parcel) a 3–5 s LLM call per parcel does not fit inline. There it belongs in the exception lane (the rule handles the bulk, the LLM replaces the 15 s human video-coding step), or it needs a small local model.
+3. **LLMs win on faults no rule was written for** (hard set: rule 4 shipped faults, Fable 0).
+4. **Cost, not speed, is the blocker today.** Calling a frontier model on every parcel costs more than it saves at a 0.3% fault rate. Routing only rule-flagged parcels brings it to about the rule's cost (estimate).
+5. **Next:** a small model as first-pass filter (fine-tuned or distilled), frontier model only for low-confidence calls. A fine-tuned small model on the text version of this task reached 56/100 vs the rule's 84, so this needs the right data and the right role. Not yet run on images.
+
+Limits: simulation and synthetic data, not field numbers; one robot model and one camera; latency measured through CLI tools on a shared GPU; local Qwen3-VL run is NOT_RUN for this set.
+
+## Files
+
+| Path | What |
+|---|---|
+| `isaac/sort_cell.py` | Isaac cell: `--capture` pick-camera images, `--cycle` robot cycle times, `--video id:dest` front-view frames. Needs a small kinematics helper (`cellkit`: RB16 FK/IK and move timing) from a separate project, set `CELLKIT_DIR` |
+| `img/gen_fc_set.py`, `img/fc_common.py` | synthetic parcel set + label/top textures, policy text |
+| `img/decide_rule_fc.py` | rule baseline |
+| `img/decide_llm_image.py` | LLM decider (`claude:<model>`, `agy:<model>`, local OpenAI-compatible server) with ROI crops (`ROI=1`) |
+| `img/analyze_fc.py`, `img/cost10k.py` | tables, per-10k cost |
+| `img/sets/`, `img/pred_*` | parcel sets and every decision (id, prediction, gold, latency, tokens, CLI cost) |
+| `make_video_en.py`, `make_video.py` | video compositing (PIL + ffmpeg) |
+
+---
+
+### 한국어 요약
+현재 제조 현장의 피지컬 AI는 "룰 + LLM 판단 + IK"를 섞는 구성이 현실적이라는 의견과, LLM은 느려서 라인에 못 쓴다는 현업 의견을 Isaac 출고 검사 셀에서 비교했다. LLM 판단 약 4.6초는 이 코봇 셀 사이클(4.5~6.1초)과 같은 수준이고 사람 15초보다 빠르다. 다만 1,600~2,500 PPH 고속 인덕션(건당 1.4~2.3초)에는 인라인으로 들어가지 않으므로 예외 처리 층에 둬야 한다. 정확도는 처음 보는 파손에서 LLM이 앞섰고(어려운 100건 Fable 놓친 오류 0, 룰 4), 걸림돌은 속도가 아니라 건당 비용이다(손익분기 건당 약 20~40원). 시뮬레이션 · 합성 데이터 결과다.

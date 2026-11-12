@@ -1,0 +1,92 @@
+{
+ "parcel_h_0.1": {
+  "induct": {
+   "move_s": 5.801,
+   "vacuum_s": 0.3,
+   "cycle_s": 6.101,
+   "segments_s": [
+    0.49,
+    0.49,
+    1.906,
+    0.505,
+    0.505,
+    1.906
+   ]
+  },
+  "tote": {
+   "move_s": 4.244,
+   "vacuum_s": 0.3,
+   "cycle_s": 4.544,
+   "segments_s": [
+    0.49,
+    0.49,
+    1.128,
+    0.505,
+    0.505,
+    1.128
+   ]
+  }
+ },
+ "parcel_h_0.25": {
+  "induct": {
+   "move_s": 5.879,
+   "vacuum_s": 0.3,
+   "cycle_s": 6.179,
+   "segments_s": [
+    0.506,
+    0.506,
+    1.904,
+    0.529,
+    0.529,
+    1.904
+   ]
+  },
+  "tote": {
+   "move_s": 4.297,
+   "vacuum_s": 0.3,
+   "cycle_s": 4.597,
+   "segments_s": [
+    0.506,
+    0.506,
+    1.128,
+    0.515,
+    0.515,
+    1.128
+   ]
+  }
+ },
+ "parcel_h_0.35": {
+  "induct": {
+   "move_s": 6.163,
+   "vacuum_s": 0.3,
+   "cycle_s": 6.463,
+   "segments_s": [
+    0.517,
+    0.517,
+    1.904,
+    0.661,
+    0.661,
+    1.904
+   ]
+  },
+  "tote": {
+   "move_s": 4.324,
+   "vacuum_s": 0.3,
+   "cycle_s": 4.624,
+   "segments_s": [
+    0.517,
+    0.517,
+    1.128,
+    0.517,
+    0.517,
+    1.128
+   ]
+  }
+ },
+ "assumptions": {
+  "joint_vel_max": 2.0,
+  "joint_acc_max": 6.0,
+  "vacuum_each_s": 0.15,
+  "model": "RB16-900E kinematic (Lula IK + trapezoid joint timing), no physics"
+ }
+}
