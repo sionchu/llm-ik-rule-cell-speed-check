@@ -5,7 +5,7 @@ This repo measures that trade-off in one simulated cell: same parcels, same came
 
 ![Same parcel, three deciders](docs/frames/en_17.5.jpg)
 
-Video (57 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
+Video (43 s): [`results/FC_outbound_check_linkedin_EN.mp4`](results/FC_outbound_check_linkedin_EN.mp4) · Korean long version (68 s): [`results/FC_outbound_check_linkedin.mp4`](results/FC_outbound_check_linkedin.mp4)
 
 ## Setup
 
